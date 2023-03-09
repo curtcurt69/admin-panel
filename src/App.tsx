@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Refine, GitHubBanner } from "@pankod/refine-core";
+import { Refine } from "@pankod/refine-core";
 import {
   notificationProvider,
   ChakraProvider,
@@ -8,19 +8,24 @@ import {
   ReadyPage,
   ErrorComponent,
   Layout,
+  AuthPage,
 } from "@pankod/refine-chakra-ui";
 
 import { DataProvider } from "@pankod/refine-strapi-v4";
-import { ChakraUIInferencer } from "@pankod/refine-inferencer/chakra-ui";
+
 import routerProvider from "@pankod/refine-react-router-v6";
 
 import { authProvider, axiosInstance } from "./authProvider";
 import { API_URL } from "./constants";
+import { PostList } from "./pages/posts/list";
+import { PostShow } from "pages/posts/show";
+import { PostCreate } from "pages/posts/create";
+import { PostEdit } from "pages/posts/edit";
 
 function App() {
   return (
     <>
-      <GitHubBanner />
+      
       <ChakraProvider theme={refineTheme}>
         <Refine
           authProvider={authProvider}
@@ -29,17 +34,22 @@ function App() {
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
           Layout={Layout}
+          // highlight-start
+          LoginPage={AuthPage}
           resources={[
             {
               name: "posts",
-              list: ChakraUIInferencer,
-              edit: ChakraUIInferencer,
-              show: ChakraUIInferencer,
-              create: ChakraUIInferencer,
+              list: PostList,
+              show: PostShow,
+              create: PostCreate,
+              edit: PostEdit,
               canDelete: true,
             },
+          
+            // highlight-end
           ]}
           routerProvider={routerProvider}
+          options={{mutationMode: "undoable"}}
         />
       </ChakraProvider>
     </>
