@@ -1,4 +1,5 @@
 # admin-panel
+This is an admin panel for posts. You can perform basic CRUD functions, sort data, and filter data. This project uses TypeScript, HTML, React, Refine and Chakra UI. Credits to Peter Osah from dev.to for the very helpful tutorial!
 
 <div align="center" style="margin: 30px;">
     <a href="https://refine.dev">
